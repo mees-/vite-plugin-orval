@@ -11,7 +11,14 @@
     "vite",
     "vite-plugin"
   ],
+  "homepage": "https://github.com/mees-/vite-plugin-orval#readme",
+  "bugs": "https://github.com/mees-/vite-plugin-orval/issues",
   "license": "MIT",
+  "author": "Mees van Dijk <mees@mees.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mees-/vite-plugin-orval.git"
+  },
   "files": [
     "dist"
   ],
@@ -34,7 +41,7 @@
     "lint": "oxlint",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
     "jiti": "^2.7.0",
@@ -48,12 +55,12 @@
     "oxlint": "^1.82.0",
     "tsdown": "^0.23.0",
     "typescript": "^6.0.3",
-    "vite": "^7.3.6",
+    "vite": "^8.3.0",
     "vitest": "^5.0.0"
   },
   "peerDependencies": {
     "orval": "^8.0.0",
-    "vite": "^5.1.0 || ^6.0.0 || ^7.0.0"
+    "vite": "^5.1.0 || ^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "engines": {
     "node": ">=20.19"

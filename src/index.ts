@@ -7,6 +7,7 @@ import { normalizePath } from 'vite'
 import type { Logger, Plugin, ViteDevServer } from 'vite'
 
 import { loadConfig, resolveWatchPaths } from './config.ts'
+import { withProjectName } from './log.ts'
 
 const PLUGIN_NAME = 'vite-plugin-orval'
 const DEFAULT_DEBOUNCE_MS = 200
@@ -87,7 +88,9 @@ export function orval(pluginOptions: OrvalPluginOptions = {}): Plugin {
 
     for (const project of config.projects) {
       logger.info(`[${PLUGIN_NAME}] generating ${project.name}`, { timestamp: true })
-      await orvalGenerate(project.options, config.workspace, globalOptions)
+      await withProjectName(project.name, () =>
+        orvalGenerate(project.options, config.workspace, globalOptions),
+      )
     }
   }
 

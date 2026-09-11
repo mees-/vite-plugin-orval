@@ -17,7 +17,7 @@ changes — no second terminal, no `orval --watch` process to babysit.
 npm install -D vite-plugin-orval orval
 ```
 
-`orval` and `vite` are peer dependencies.
+`orval` and `vite` are peer dependencies: orval 8, vite 5.1 through 8.
 
 ## Usage
 
@@ -94,6 +94,12 @@ watched either way.
   dev server, or touch the config file, to refetch.
 - **`vite build --watch`** re-runs generation on every rebuild through rollup's
   watch files. Only concrete file paths are registered there, not globs.
+- **`output.clean` deletes before it parses.** Orval empties the output folder
+  before it reads the spec, so with `clean` enabled — it is off by default — a
+  broken spec in dev leaves you with no generated client at all until you fix it.
+  The dev server survives, but every import of the client fails to resolve, which
+  looks like a resolution bug rather than a spec error. Leave `clean` off if you
+  would rather keep the last good output through a failed run.
 - **Generated output should not be watched.** Keep your orval `output.target`
   out of the `watch` patterns, or generation will retrigger itself.
 - The plugin is ESM only, like orval itself.
